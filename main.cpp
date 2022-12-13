@@ -1,22 +1,22 @@
-int digitalPin = 4;
-int analogPin = A0; // KY-026 analog interface
+int digitalPinIn = A4; // KY-026 analog interface
+int digitalPinOut = A5; // KY-026 analog interface
 int digitalVal; // digital readings
-int analogVal; //analog readings
- 
+
 void setup()
 {
-pinMode(digitalPin, OUTPUT);
-digitalWrite(digitalPin, LOW);
+pinMode(digitalPinIn, INPUT);
+pinMode(digitalPinOut, OUTPUT);
+digitalWrite(digitalPinOut, LOW);
 }
- 
+
 void loop()
 {
 // lire la valeur retourné par le capteur de lumière
-analogVal = analogRead(analogPin);
-if (analogVal>670){ // lorsque la capteur lumière détecte une luminosité très basse
-digitalWrite(digitalPin, HIGH); // allumer LED rouge
+digitalVal = digitalRead(digitalPinIn);
+if (digitalVal == 0){ // lorsque la capteur détecte une présence
+digitalWrite(digitalPinOut, LOW); // allumer LED verte
 } else {
-digitalWrite(digitalPin, LOW); // éteindre LED rouge
+digitalWrite(digitalPinOut, HIGH); // éteindre LED verte
 }
 delay(100);
 }
